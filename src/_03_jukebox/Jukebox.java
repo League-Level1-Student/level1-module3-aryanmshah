@@ -5,6 +5,9 @@ package _03_jukebox;
  */
 
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -12,7 +15,10 @@ import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import javazoom.jl.player.advanced.AdvancedPlayer;
@@ -20,15 +26,19 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /*   If you don't have javazoom.jar in your project, you can download it from here: http://bit.ly/javazoom
  *   Right click your project and add it as a JAR (Under Java Build Path > Libraries).*/
 
-public class Jukebox implements Runnable {
-
+public class Jukebox implements Runnable, ActionListener {
+	int press=0;
+	
     public void run() {
-
+    	Dimension BIG = new Dimension(200,50);
+    	Dimension SMALL = new Dimension(200,200);
 		// 1. Find an mp3 on your computer or on the Internet.
 		// 2. Create a Song object for that mp3
-
+    	
+    	
+    			
 		// 3. Play the Song
-
+    	
 		/*
 		 * 4. Create a user interface for your Jukebox so that the user can to
 		 * choose which song to play. You can use can use a different button for
@@ -36,7 +46,27 @@ public class Jukebox implements Runnable {
 		 * cover is clicked, stop the currently playing song, and play the one
 		 * that was selected.
 		 */
+    	 JLabel label= loadImage("g.jpg");
+    	   label.setPreferredSize(SMALL);
+          
+    	JFrame Frame=new JFrame();
+    	JPanel Panel= new JPanel();
+    	Frame.add(Panel);
+    	Frame.setVisible(true);
+    	Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	Frame.setSize(500, 500);
+    	JLabel Label= new JLabel();
+    	JButton button= new JButton();
+    	Panel.add(Label);
+    	 Panel.add(label);
+    	Panel.add(button);
+        button.setPreferredSize(BIG);
+         button.setText("Through da storm By Polo G");
+         button.addActionListener(this);
+        
+        
     }
+    	
     
     
 	/* Use this method to add album covers to your Panel. */
@@ -44,6 +74,20 @@ public class Jukebox implements Runnable {
 		URL imageURL = getClass().getResource(fileName);
 		Icon icon = new ImageIcon(imageURL);
 		return new JLabel(icon);
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		Song pole=new Song("poles.mp3");
+		pole.play();
+		press++;
+		if(press==1) {
+			pole.stop();
+		}
+		
 	}
 
 }
