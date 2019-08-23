@@ -34,6 +34,7 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	 *     backgroundImage.getRGB(e.getX(), e.getY()) will give you the color of the current pixel.
 	 */
 
+	
 	BufferedImage backgroundImage;
 
 
@@ -76,10 +77,20 @@ public class MagicBox extends JPanel implements Runnable, MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Hola");
-		MediaPalace mediapalace= new MediaPalace();
 		
+		MediaPalace mediapalace= new MediaPalace();
+		//mediapalace.playMusicOnComputer("/Users/league/Desktop/level1-module3-aryanmshah/src/_04_magic_box/sound.wav");	
+		  
+	int a;
+		  a=backgroundImage.getRGB(e.getX(), e.getY());
+		  System.out.println(a);
+		  int red = (a >> 16) & 0xFF;
+		  int green = (a >> 8) & 0xFF;
+		  int blue = a & 0xFF;
+		  System.out.println("R = " + red + " G = " + green + " B = " + blue);
+			System.out.println(e.getX());	  
+	System.out.println(e.getY());
 	}
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
